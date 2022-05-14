@@ -17,7 +17,7 @@ ROOT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 APPS_DIR = os.path.join(ROOT_DIR, 'enigma')
 
 env = environ.Env()
-env.read_env()
+env.read_env(os.path.join(ROOT_DIR, '.env'))
 
 # APP CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -103,7 +103,7 @@ MANAGERS = ADMINS
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
-    'default': env.db('DATABASE_URL', default='postgres://enigmauser:enigmapass@localhost/enigma'),
+    'default': env.db('DATABASE_URL', default='postgres:///enigma'),
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 

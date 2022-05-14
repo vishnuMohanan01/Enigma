@@ -69,3 +69,6 @@ mailhog
 
 
 staticfiles/
+.vscode/
+
+.env
