@@ -13,7 +13,7 @@ Production Configurations
 from __future__ import absolute_import, unicode_literals
 
 
-from django.utils import six
+import six
 
 import logging
 
