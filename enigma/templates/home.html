@@ -151,6 +151,7 @@
         <div class="container">
           <div class="col-lg-8 col-lg-offset-2">
 	    {% load socialaccount %}
+	    {% providers_media_js %}
             {% if request.user.is_authenticated %}
             <h2>GAME ON!</h2>
             <li class="login-button">
