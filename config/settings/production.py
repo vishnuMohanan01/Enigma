@@ -173,6 +173,13 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
             'formatter': 'verbose'
+        },
+        'gunicorn': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'formatter': 'verbose',
+            'filename': '/var/log/enigma/gunicorn.err.log',
+            'maxBytes': 1024 * 1024 * 100,  # 100 mb
         }
     },
     'loggers': {
@@ -180,6 +187,11 @@ LOGGING = {
             'level': 'ERROR',
             'handlers': ['console'],
             'propagate': False,
+        },
+        'gunicorn.errors': {
+            'level': 'DEBUG',
+            'handlers': ['gunicorn'],
+            'propagate': True,
         },
         'raven': {
             'level': 'DEBUG',

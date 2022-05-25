@@ -232,7 +232,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # Some really nice defaults
-ACCOUNT_AUTHENTICATION_METHOD = 'username'
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_USERNAME_REQUIRED = False
@@ -242,6 +242,38 @@ ACCOUNT_ADAPTER = 'enigma.users.adapters.AccountAdapter'
 SOCIALACCOUNT_ADAPTER = 'enigma.users.adapters.SocialAccountAdapter'
 ACCOUNT_SIGNUP_FORM_CLASS = 'enigma.users.forms.SignupForm'
 SOCIALACCOUNT_AUTO_SIGNUP = False
+
+# social app class
+SOCIALACCOUNT_PROVIDERS = {
+            'facebook':
+                {
+                    'METHOD': 'oauth2',
+                    'SDK_URL': '//connect.facebook.net/{locale}/sdk.js',
+                    'SCOPE': ['email', 'public_profile'],
+                    'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+                    'INIT_PARAMS': {'cookie': True},
+                    'FIELDS': [
+                                 'id',
+                                 'first_name',
+                                 'last_name',
+                                 'middle_name',
+                                 'name',
+                                 'name_format',
+                                 'picture',
+                                 'short_name'
+                                 ],
+                   'EXCHANGE_TOKEN': True,
+                   'LOCALE_FUNC': lambda request: 'en_US',
+                   'VERIFIED_EMAIL': False,
+                   'VERSION': 'v13.0',
+                   'APP': {
+                                  'client_id': env('FACEBOOK_APP_ID'),  # !!! THIS App ID
+                                  'secret': env('FACEBOOK_APP_SECRET'),  # !!! THIS App Secret
+                                  'key': env('FACEBOOK_AUTH_KEY')
+                                  }
+            }
+}
+
 
 # Custom user app defaults
 # Select the correct user model
